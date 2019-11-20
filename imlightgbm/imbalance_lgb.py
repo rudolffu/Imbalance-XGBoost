@@ -115,7 +115,7 @@ class imbalance_lightlgb(BaseEstimator, ClassifierMixin):
             weighted_loss_obj = Weight_Binary_Cross_Entropy(imbalance_alpha=self.imbalance_alpha)
             # fit the classfifier
             self.boosting_model = lgb.LGBMClassifier.fit(train_data, train_label, self.para_dict, 
-                                            self.num_round, self.eval_list,
+                                            self.num_round, eval_set=self.eval_list,
                                             object=weighted_loss_obj.weighted_binary_cross_entropy, feval=evalerror,
                                             verbose_eval=False)
         elif self.special_objective == 'focal':
